@@ -57,3 +57,66 @@ root.mainloop()
 
 if len(app.name):
     print("After Exit, name =", app.name)
+
+
+"""
+import tkinter as tk     ## Python 3.x
+from tkinter import font
+
+class Timer_Test() :
+     def __init__(self, master=None) :
+        self.master = master
+        self.app_font = font.Font(name='Cursor', size=12)
+        self.ctr=20
+        self.name=""
+        self.time_left=tk.IntVar()
+        self.start_timer()
+        self.init_window()
+
+     def init_window(self):
+         create the initial widgets
+        
+        self.time_left.set("Enter your name\nYou have 10 seconds")
+        tk.Label(self.master, textvariable=self.time_left,
+                bg="yellow", font=self.app_font).grid(sticky="nsew")
+        self.ent=tk.Entry(self.master, bg="lightblue", font=self.app_font)
+        self.ent.grid(row=1, column=0)
+        tk.Button(self.master, text="Use this name", font=self.app_font,
+                 command=self.name_entered, activebackground="LightSalmon2",
+                 bg="lightyellow").grid(row=10, column=0, sticky="nsew")
+        self.ent.focus_set()
+
+     def name_entered(self):
+        button calls this function which stores the name entered
+            and quits
+        
+        self.name=self.ent.get()
+        self.master.quit()
+
+     def start_timer(self):
+         countdown timer and a label that displays time left
+            in a different window
+        
+        top=tk.Toplevel()
+        self.lbl=tk.Label(top, bg="orange", font=self.app_font, width=10)
+        self.lbl.grid()
+        self.update_timer()
+
+     def update_timer(self):
+         This function repeatedly calls itself until time has
+            expired, and then it shuts down the GUI
+          
+        self.ctr -= 1
+        self.lbl["text"]=int(self.ctr/2)  # /2 because it updates every 1/2 second
+        if self.ctr > 0:  ## 10 seconds
+            self.master.after(500, self.update_timer)  ## 1/2 second
+        else:             ## time is up
+            self.master.quit()
+
+root = tk.Tk()
+app = Timer_Test(root)
+root.mainloop()
+
+if len(app.name):
+    print("After Exit, name =", app.name)
+"""
