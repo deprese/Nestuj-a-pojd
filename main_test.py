@@ -49,7 +49,6 @@ def countdown(time_sec):
 
 print("stop")
 
-if __name__ == "__main__":
-    __init__()
+
     #number = int(input("enter a number "))
     #countdown(number * 60)
