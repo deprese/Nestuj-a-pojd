@@ -2,7 +2,6 @@ import time
 import threading
 import tkinter
 from tkinter import ttk
-import os
 import tkinter.messagebox
 
 timerup = False
