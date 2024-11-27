@@ -67,28 +67,29 @@ def popup_on():
     popupstatus = True
     popupbutton.config(text="ano", command=popup_off)
 
-root = tkinter.Tk()
+root = ctk.CTk()
 root.title("nestůj a pojď")
-root.geometry("400x200")
-mainframe = tkinter.Frame(root, background="light gray")
+root.geometry("400x500")
+mainframe = tkinter.Frame(root, background="#20242c")
 mainframe.pack(fill="both", expand=True)
 
-text = ttk.Label(mainframe, text="čas se zjeví zde", font=("Brass Mono", 30))
+text = ctk.CTkLabel(mainframe, text="čas se zjeví zde", font=("Brass Mono", 30))
 text.grid(row=0, column=0, pady=20)
-resetbutton = ttk.Button(mainframe, text="vynulovat", command=reset)
-resetbutton.grid(row=0, column=1)
+resetbutton = ctk.CTkButton(mainframe, text="vynulovat", command=reset)
+resetbutton.place(x=200, y=200)
+#resetbutton.grid(row=0, column=0)
 
-field = ttk.Entry(mainframe, width=50)
+field = ctk.CTkEntry(mainframe, width=50)
 field.grid(row=1, column=0, sticky="NWES")
-timebutton = ttk.Button(mainframe, text="zapnout", command=countdown_start)
+timebutton = ctk.CTkButton(mainframe, text="zapnout", command=countdown_start)
 timebutton.grid(row=1, column=1)
 
-hint = ttk.Label(mainframe, text="zvolte si čas v minutách, celými čísly")
+hint = ctk.CTkLabel(mainframe, text="zvolte si čas v minutách, celými čísly")
 hint.grid(row=2, column=0, pady=10)
 
-popuptext = ttk.Label(mainframe, text="upozornit na konec časovače pop-upem:")
+popuptext = ctk.CTkLabel(mainframe, text="upozornit na konec časovače pop-upem:")
 popuptext.place(x=7, y=173)
-popupbutton = ttk.Button(mainframe, text="ano", command=popup_off)
+popupbutton = ctk.CTkButton(mainframe, text="ano", command=popup_off)
 popupbutton.place(x=230, y=170)
 
 root.mainloop()
