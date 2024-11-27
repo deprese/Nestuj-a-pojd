@@ -1,5 +1,6 @@
 import time
 import threading
+import customtkinter
 import tkinter
 from tkinter import ttk
 import tkinter.messagebox
@@ -10,7 +11,7 @@ popupstatus = True
 def countdown(seconds):
     global timerup
     timerup = True
-    seconds *= 60
+    seconds *= 1
     while seconds > -1:
         if timerup == False:
             break
