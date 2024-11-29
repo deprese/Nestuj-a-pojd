@@ -1,11 +1,25 @@
 import time
 import threading
 import customtkinter as ctk
-import tkinter
-from tkinter import ttk
+from CustomTkinterMessagebox import CTkMessagebox
 import tkinter.messagebox
+from tkinter import ttk
 import wave
 import pyaudio
+import os
+import sys
+
+# Helper function to get the correct path to the bundled file
+def resource_path(relative_path):
+    if getattr(sys, 'frozen', False):  # Check if running as a bundled executable
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+# Path to the audio file
+sound_file = resource_path("notifikace.wav")
+
+# Play the sound using PyAudio and Wave
+
 
 timerup = False
 popupstatus = True
@@ -29,11 +43,18 @@ def countdown(seconds):
     if timerup == False:
         return
     timerup = False
+    if popupstatus == True:
+        CTkMessagebox.messagebox("Nestůj a pojď!", "čas na pauzu!")
     if zvukstatus == True:
-        with wave.open("notifikace.wav", 'rb') as wf:
+        with wave.open(sound_file, 'rb') as wf:
             p = pyaudio.PyAudio()
 
-            stream = p.open(format=p.get_format_from_width(wf.getsampwidth()), channels=wf.getnchannels(), rate=wf.getframerate(), output=True)
+            stream = p.open(
+                format=p.get_format_from_width(wf.getsampwidth()),
+                channels=wf.getnchannels(),
+                rate=wf.getframerate(),
+                output=True
+            )
 
             data = wf.readframes(1024)
             while data:
@@ -43,8 +64,6 @@ def countdown(seconds):
             stream.stop_stream()
             stream.close()
             p.terminate()
-    if popupstatus == True:
-        tkinter.messagebox.showinfo("pauza", "čas na pauzu!")
     else:
         text.configure(text="čas na pauzu!")
 
@@ -102,6 +121,7 @@ def rezim():
         rezimtext.configure(text_color="black")
         zvuktext.configure(text_color="black")
         popuptext.configure(text_color="black")
+        rezimbutton.configure(text="světlý")
     else:
         root.configure(fg_color="#242424")
         text.configure(text_color="white")
@@ -109,30 +129,16 @@ def rezim():
         rezimtext.configure(text_color="white")
         zvuktext.configure(text_color="white")
         popuptext.configure(text_color="white")
-
+        rezimbutton.configure(text="tmavý")
+#--------------------------------------------------------------------------------------------------------------------------------------------
 root = ctk.CTk()
 root.title("nestůj a pojď")
 root.geometry("500x500")
 root.configure(fg_color="#242424")
-root.columnconfigure(0, weight=1)
-root.columnconfigure(1, weight=1)
-root.columnconfigure(2, weight=1)
-root.rowconfigure(0, weight=1)
-root.rowconfigure(1, weight=1)
-root.rowconfigure(2, weight=1)
-root.rowconfigure(3, weight=1)
-root.rowconfigure(4, weight=1)
-root.rowconfigure(5, weight=1)
-root.rowconfigure(6, weight=1)
-root.rowconfigure(7, weight=1)
-root.rowconfigure(8, weight=1)
-root.rowconfigure(9, weight=1)
-root.rowconfigure(10, weight=1)
-root.rowconfigure(11, weight=1)
-root.rowconfigure(12, weight=1)
-root.rowconfigure(13, weight=1)
-root.rowconfigure(14, weight=1)
-
+for i in range(3):
+    root.columnconfigure(i, weight=1)
+for i in range(15):
+    root.rowconfigure(i, weight=1)
 
 
 text = ctk.CTkLabel(root, text="čas se zjeví zde", font=("Brass Mono", 30))
